@@ -20,7 +20,7 @@ template sudoku() {
 ///----------------Add-------------------
     component rpp = rangeProof0to9(32); //32 bits RangeProof for Puzzle
     component rps = rangeProof0to9(32); //32 bits RangeProof for Solution
-///--------------------------------------
+///--------------------------------------//
     
     for (var i=0; i<9; i++) {
         for (var j=0; j<9; j++) {
@@ -29,7 +29,7 @@ template sudoku() {
             rpp.in <== puzzle[i][j];
             rps.in <== solution[i][j];
             assert(rpp.out * rps.out);
-///--------------------------------------
+///--------------------------------------//
             mul.a[i][j] <== puzzle[i][j];
             mul.b[i][j] <== solution[i][j];
         }

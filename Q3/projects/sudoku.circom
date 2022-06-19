@@ -14,23 +14,22 @@ template sudoku() {
     signal output out;
 
     // check whether the solution is zero everywhere the puzzle has values (to avoid trick solution)
-
     component mul = matElemMul(9,9);
-    
     //[assignment] hint: you will need to initialize your RangeProof components here
+
+///----------------Add-------------------
     component rpp = rangeProof0to9(32); //32 bits RangeProof for Puzzle
     component rps = rangeProof0to9(32); //32 bits RangeProof for Solution
+///--------------------------------------
     
     for (var i=0; i<9; i++) {
         for (var j=0; j<9; j++) {
-            // assert(puzzle[i][j]>=0); //[assignment] change assert() to use your created RangeProof instead
-            // assert(puzzle[i][j]<=9); //[assignment] change assert() to use your created RangeProof instead
-            // assert(solution[i][j]>=0); //[assignment] change assert() to use your created RangeProof instead
-            // assert(solution[i][j]<=9); //[assignment] change assert() to use your created RangeProof instead
-            
+
+///----------------Add-------------------
             rpp.in <== puzzle[i][j];
             rps.in <== solution[i][j];
             assert(rpp.out * rps.out);
+///--------------------------------------
             mul.a[i][j] <== puzzle[i][j];
             mul.b[i][j] <== solution[i][j];
         }
@@ -40,6 +39,10 @@ template sudoku() {
             mul.out[i][j] === 0;
         }
     }
+
+
+
+
 
     // sum up the two inputs to get full solution and square the full solution
 
